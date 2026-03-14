@@ -81,3 +81,10 @@ SmartConvertUtility
 - Arad Tahmasebifar
 - Shaheer Ansari
 - Niaj Hossain
+
+## Future Improvements
+- Currency API integration
+- CoreData persistent storage
+- Dark Mode customization
+-nCloud synchronization
+- Additional converters
