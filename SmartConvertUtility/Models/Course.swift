@@ -8,6 +8,7 @@ import Foundation
 
 struct Course: Identifiable {
     let id = UUID()
+    var name: String
     var grade: Double
     var creditHours: Double
 }
