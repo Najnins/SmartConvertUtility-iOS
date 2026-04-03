@@ -9,8 +9,10 @@ import Combine
 
 final class GPAViewModel: ObservableObject {
     @Published var courses: [Course] = []
+    @Published var courseNameText: String = ""
     @Published var gradeText: String = ""
     @Published var creditText: String = ""
+    @Published var errorMessage: String = ""
 
     var gpa: Double {
         let totalPoints = courses.reduce(0) { $0 + ($1.grade * $1.creditHours) }
@@ -20,18 +22,44 @@ final class GPAViewModel: ObservableObject {
     }
 
     func addCourse() {
-        guard let grade = Double(gradeText),
-              let credits = Double(creditText),
-              credits > 0 else { return }
+        let name = courseNameText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedGrade = gradeText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedCredit = creditText.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        courses.append(Course(grade: grade, creditHours: credits))
+        guard !name.isEmpty else {
+            errorMessage = "Please enter course name."
+            return
+        }
+
+        guard let grade = Double(trimmedGrade),
+              let credits = Double(trimmedCredit) else {
+            errorMessage = "Please enter valid numeric values."
+            return
+        }
+
+        guard credits > 0 else {
+            errorMessage = "Credit hours must be greater than 0."
+            return
+        }
+
+        guard grade >= 0, grade <= 4.0 else {
+            errorMessage = "Grade point must be between 0.0 and 4.0."
+            return
+        }
+
+        courses.append(Course(name: name, grade: grade, creditHours: credits))
+
+        courseNameText = ""
         gradeText = ""
         creditText = ""
+        errorMessage = ""
     }
 
     func reset() {
         courses.removeAll()
+        courseNameText = ""
         gradeText = ""
         creditText = ""
+        errorMessage = ""
     }
 }
