@@ -13,6 +13,7 @@ enum ConversionCategory: String, CaseIterable, Identifiable {
     case volume = "Volume"
     case speed = "Speed"
     case dataStorage = "Data Storage"
+    case currency = "Currency"
 
     var id: String { rawValue }
 
@@ -30,6 +31,8 @@ enum ConversionCategory: String, CaseIterable, Identifiable {
             return ["km/h", "mph"]
         case .dataStorage:
             return ["KB", "MB", "GB", "TB"]
+        case .currency:
+            return ["USD", "CAD", "EUR", "BDT"]
         }
     }
 }
