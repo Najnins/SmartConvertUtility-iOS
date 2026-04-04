@@ -24,6 +24,8 @@ struct ConversionService {
             return convertSpeed(value: value, from: from, to: to)
         case .dataStorage:
             return convertDataStorage(value: value, from: from, to: to)
+        case .currency:
+            return convertCurrency(value: value, from: from, to: to)
         }
     }
 
@@ -131,5 +133,22 @@ struct ConversionService {
         case "TB": return kb / (1024 * 1024 * 1024)
         default: return value
         }
+    }
+
+    private func convertCurrency(value: Double, from: String, to: String) -> Double {
+        let ratesToUSD: [String: Double] = [
+            "USD": 1.0,
+            "CAD": 0.72,
+            "EUR": 1.08,
+            "BDT": 0.0082
+        ]
+
+        guard let fromRate = ratesToUSD[from],
+              let toRate = ratesToUSD[to] else {
+            return value
+        }
+
+        let usdValue = value * fromRate
+        return usdValue / toRate
     }
 }
