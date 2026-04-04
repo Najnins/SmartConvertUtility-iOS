@@ -19,7 +19,7 @@ struct HistoryView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(item.category)
                             .font(.headline)
-                        Text("\(item.inputValue) \(item.fromUnit) → \(item.result)")
+                        Text("\(item.inputValue) \(item.fromUnit) -> \(item.result)")
                         Text(item.date.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption)
                             .foregroundStyle(.secondary)

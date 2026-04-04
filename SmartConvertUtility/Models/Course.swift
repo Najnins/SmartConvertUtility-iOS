@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  Course.swift
 //  SmartConvertUtility
 //
 //  Created by Najnin on 2026-03-13.

@@ -19,7 +19,7 @@ struct FavoritesView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(favorite.category)
                             .font(.headline)
-                        Text("\(favorite.fromUnit) → \(favorite.toUnit)")
+                        Text("\(favorite.fromUnit) -> \(favorite.toUnit)")
                             .foregroundStyle(.secondary)
                     }
                 }
