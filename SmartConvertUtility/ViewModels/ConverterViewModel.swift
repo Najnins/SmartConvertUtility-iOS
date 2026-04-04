@@ -29,47 +29,22 @@ final class ConverterViewModel: ObservableObject {
     }
 
     func convert() -> Double? {
-        //Check empty input
-        guard !inputValue.trimmingCharacters(in: .whitespaces).isEmpty else {
-            resultText = "Input can not be empty."
+        let trimmedValue = inputValue.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !trimmedValue.isEmpty else {
+            resultText = "Input cannot be empty."
             return nil
         }
-        //Validate number
-        guard let value = Double(inputValue) else {
+
+        guard let value = Double(trimmedValue) else {
             resultText = "Please enter a valid number."
             return nil
         }
-        
-        func convert() -> Double? {
-            // Check empty input
-            guard !inputValue.trimmingCharacters(in: .whitespaces).isEmpty else {
-                resultText = "Input can not be empty."
-                return nil
-            }
 
-            // Validate number
-            guard let value = Double(inputValue) else {
-                resultText = "Please enter a valid number."
-                return nil
-            }
-
-            // Prevent same unit
-            if fromUnit == toUnit {
-                resultText = "Both units are the same."
-                return nil
-            }
-
-            let result = conversionService.convert(
-                value: value,
-                category: selectedCategory,
-                from: fromUnit,
-                to: toUnit
-            )
-
-            resultText = String(format: "%.2f %@", result, toUnit)
-            return result
+        guard fromUnit != toUnit else {
+            resultText = "Please choose different units."
+            return nil
         }
-        
 
         let result = conversionService.convert(
             value: value,
