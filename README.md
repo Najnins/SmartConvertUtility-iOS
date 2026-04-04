@@ -1,14 +1,14 @@
 # SmartConvertUtility
 
-All-in-One Conversion & Student Utility App built with **SwiftUI**.
+All-in-One Conversion and Student Utility App built with **SwiftUI**.
 
 ---
 
 ## Overview
 
-SmartConvertUtility is an iOS application designed to provide multiple conversion tools and student utilities in one centralized platform.
+SmartConvertUtility is an iOS application designed to bring multiple converter tools and student utilities together in one place.
 
-The app helps users convert temperature, weight, currency, and calculate GPA and BMI without switching between multiple apps.
+The app currently supports temperature, weight, length, volume, speed, data storage, and currency conversion, along with GPA, BMI, time zone, and study timer tools.
 
 ---
 
@@ -32,6 +32,7 @@ The app helps users convert temperature, weight, currency, and calculate GPA and
 ### Additional Features
 - Favorites
 - Conversion History
+- Local persistence for favorites and history
 - Clean SwiftUI interface
 - MVVM architecture
 
@@ -39,7 +40,7 @@ The app helps users convert temperature, weight, currency, and calculate GPA and
 
 ## Architecture
 
-```
+```text
 View (SwiftUI)
       ↓
 ViewModel
@@ -63,14 +64,14 @@ Services / Storage
 
 ## Project Structure
 
-```
+```text
 SmartConvertUtility
-│
-├── Models
-├── ViewModels
-├── Views
-├── Services
-└── Resources
+|
+|-- Models
+|-- ViewModels
+|-- Views
+|-- Services
+`-- Resources
 ```
 
 ---
@@ -83,8 +84,8 @@ SmartConvertUtility
 - Niaj Hossain
 
 ## Future Improvements
-- Currency API integration
-- CoreData persistent storage
-- Dark Mode customization
--nCloud synchronization
+- Live currency API integration
+- Core Data persistent storage
+- Dark mode customization
+- iCloud synchronization
 - Additional converters
