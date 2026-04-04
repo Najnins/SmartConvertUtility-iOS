@@ -60,6 +60,8 @@ struct ConverterView: View {
                     .font(.title3.bold())
 
                 Button("Save to Favorites") {
+                    guard viewModel.convert() != nil else { return }
+
                     let favorite = FavoriteConversion(
                         category: viewModel.selectedCategory.rawValue,
                         fromUnit: viewModel.fromUnit,
