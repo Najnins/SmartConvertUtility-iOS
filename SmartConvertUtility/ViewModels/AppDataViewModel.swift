@@ -8,8 +8,20 @@ import Foundation
 import Combine
 
 final class AppDataViewModel: ObservableObject {
-    @Published var favorites: [FavoriteConversion] = []
-    @Published var history: [ConversionRecord] = []
+    @Published var favorites: [FavoriteConversion] = [] {
+        didSet { saveFavorites() }
+    }
+    @Published var history: [ConversionRecord] = [] {
+        didSet { saveHistory() }
+    }
+
+    private let favoritesKey = "favorite_conversions"
+    private let historyKey = "conversion_history"
+
+    init() {
+        loadFavorites()
+        loadHistory()
+    }
 
     func addFavorite(_ favorite: FavoriteConversion) {
         let alreadyExists = favorites.contains {
@@ -33,5 +45,33 @@ final class AppDataViewModel: ObservableObject {
         }
 
         history.insert(record, at: 0)
+    }
+
+    private func saveFavorites() {
+        guard let data = try? JSONEncoder().encode(favorites) else { return }
+        UserDefaults.standard.set(data, forKey: favoritesKey)
+    }
+
+    private func saveHistory() {
+        guard let data = try? JSONEncoder().encode(history) else { return }
+        UserDefaults.standard.set(data, forKey: historyKey)
+    }
+
+    private func loadFavorites() {
+        guard let data = UserDefaults.standard.data(forKey: favoritesKey),
+              let savedFavorites = try? JSONDecoder().decode([FavoriteConversion].self, from: data) else {
+            return
+        }
+
+        favorites = savedFavorites
+    }
+
+    private func loadHistory() {
+        guard let data = UserDefaults.standard.data(forKey: historyKey),
+              let savedHistory = try? JSONDecoder().decode([ConversionRecord].self, from: data) else {
+            return
+        }
+
+        history = savedHistory
     }
 }
